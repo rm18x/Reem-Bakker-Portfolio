@@ -42,7 +42,7 @@ export default function Hero() {
               <ArrowRightIcon className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
             </a>
             <a
-              href="public/CV Reem Bakker .pdf"
+              href="CV-Reem-Bakker .pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-full border border-hairline bg-white px-6 py-3 text-sm font-semibold text-ink transition-colors duration-200 hover:border-accent/40 hover:text-accent"
