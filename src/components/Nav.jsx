@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import { navLinks, profile } from '../data/content.js'
 import { useActiveSection } from '../hooks/useActiveSection.js'
 import { MenuIcon, CloseIcon } from './icons.jsx'
@@ -25,12 +26,11 @@ export default function Nav() {
   const close = () => setOpen(false)
 
   return (
-    <>
-      <header
-        className={`sticky top-0 z-50 border-b transition-all duration-300 ${
-          scrolled ? 'border-hairline bg-paper/90 backdrop-blur-md' : 'border-transparent bg-paper'
-        }`}
-      >
+    <header
+      className={`sticky top-0 z-50 border-b transition-all duration-300 ${
+        scrolled ? 'border-hairline bg-paper/90 backdrop-blur-md' : 'border-transparent bg-paper'
+      }`}
+    >
       <nav
         aria-label="Primary"
         className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6 md:h-[4.5rem] md:px-8"
@@ -78,45 +78,48 @@ export default function Nav() {
         </button>
       </nav>
 
-      <div
-        className={`lg:hidden ${open ? 'fixed inset-0 top-16 z-50 md:top-[4.5rem]' : 'hidden'}`}
-        aria-hidden={!open}
-      >
-        <div className="absolute inset-0 bg-paper">
-          <nav
-            aria-label="Mobile"
-            className="mx-auto flex h-full max-w-6xl flex-col px-6 pt-2 md:px-8"
+      {open &&
+        createPortal(
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-label="Mobile navigation"
+            className="fixed inset-x-0 bottom-0 top-16 z-[100] overflow-y-auto bg-paper md:top-[4.5rem]"
           >
-            <span aria-hidden="true" className="h-px bg-hairline" />
-            {navLinks.map((link, index) => {
-              const isActive = active === link.href.slice(1)
-              return (
+            <nav
+              aria-label="Mobile"
+              className="mx-auto flex min-h-full max-w-6xl flex-col px-6 pt-2 md:px-8"
+            >
+              <span aria-hidden="true" className="h-px bg-hairline" />
+              {navLinks.map((link, index) => {
+                const isActive = active === link.href.slice(1)
+                return (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    onClick={close}
+                    className={`flex items-baseline justify-between border-b border-hairline py-5 font-heading text-2xl font-bold tracking-tight transition-colors ${
+                      isActive ? 'text-accent' : 'text-ink'
+                    }`}
+                  >
+                    {link.label}
+                    <span className="text-xs font-semibold text-muted">0{index + 1}</span>
+                  </a>
+                )
+              })}
+              <div className="mt-auto pb-10 pt-8">
                 <a
-                  key={link.href}
-                  href={link.href}
+                  href="#contact"
                   onClick={close}
-                  className={`flex items-baseline justify-between border-b border-hairline py-5 font-heading text-2xl font-bold tracking-tight transition-colors ${
-                    isActive ? 'text-accent' : 'text-ink'
-                  }`}
+                  className="block rounded-md bg-ink px-5 py-4 text-center font-heading text-base font-semibold text-white transition-colors hover:bg-accent"
                 >
-                  {link.label}
-                  <span className="text-xs font-semibold text-muted">0{index + 1}</span>
+                  Let’s talk
                 </a>
-              )
-            })}
-            <div className="mt-auto pb-10 pt-8">
-              <a
-                href="#contact"
-                onClick={close}
-                className="block rounded-md bg-ink px-5 py-4 text-center font-heading text-base font-semibold text-white transition-colors hover:bg-accent"
-              >
-                Let’s talk
-              </a>
-            </div>
-          </nav>
-        </div>
-      </div>
-      </header>
-    </>
+              </div>
+            </nav>
+          </div>,
+          document.body
+        )}
+    </header>
   )
 }
