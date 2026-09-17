@@ -10,7 +10,11 @@ export default function Experience() {
 
         <div className="relative mt-10 border-l border-hairline pl-8 ml-3 md:mt-12 md:pl-12 md:ml-4">
           {experience.map((item, index) => (
-            <Reveal key={item.role} delay={index * 60} className="relative last:pb-0">
+            <Reveal
+              key={item.role}
+              delay={index * 60}
+              className={`relative last:pb-0 ${index > 0 ? 'mt-7 md:mt-0' : ''}`}
+            >
               <span
                 aria-hidden="true"
                 className={`absolute -left-8 top-1.5 h-2.5 w-2.5 -translate-x-1/2 rounded-full md:-left-12 ${
