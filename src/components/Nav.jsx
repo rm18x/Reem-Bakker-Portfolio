@@ -25,11 +25,12 @@ export default function Nav() {
   const close = () => setOpen(false)
 
   return (
-    <header
-      className={`sticky top-0 z-50 border-b transition-all duration-300 ${
-        scrolled ? 'border-hairline bg-paper/90 backdrop-blur-md' : 'border-transparent bg-paper'
-      }`}
-    >
+    <>
+      <header
+        className={`sticky top-0 z-50 border-b transition-all duration-300 ${
+          scrolled ? 'border-hairline bg-paper/90 backdrop-blur-md' : 'border-transparent bg-paper'
+        }`}
+      >
       <nav
         aria-label="Primary"
         className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6 md:h-[4.5rem] md:px-8"
@@ -78,7 +79,7 @@ export default function Nav() {
       </nav>
 
       <div
-        className={`lg:hidden ${open ? 'fixed inset-0 top-16 z-40 md:top-[4.5rem]' : 'hidden'}`}
+        className={`lg:hidden ${open ? 'fixed inset-0 top-16 z-50 md:top-[4.5rem]' : 'hidden'}`}
         aria-hidden={!open}
       >
         <div className="absolute inset-0 bg-paper">
@@ -115,6 +116,7 @@ export default function Nav() {
           </nav>
         </div>
       </div>
-    </header>
+      </header>
+    </>
   )
 }
