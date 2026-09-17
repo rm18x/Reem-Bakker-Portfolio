@@ -80,7 +80,7 @@ export default function Hero() {
       <a
         href="#experience"
         aria-label="Scroll to Experience section"
-        className="group absolute inset-x-0 bottom-6 mx-auto flex w-fit flex-col items-center gap-1 text-muted transition-colors hover:text-accent"
+        className="group absolute inset-x-0 bottom-0 mx-auto flex w-fit flex-col items-center gap-1 text-muted transition-colors hover:text-accent"
       >
         <span className="text-xs font-medium uppercase tracking-[0.2em]">Scroll</span>
         <ChevronDownIcon className="h-5 w-5 animate-bounce" />
